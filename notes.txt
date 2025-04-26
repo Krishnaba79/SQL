@@ -1,0 +1,267 @@
+
+SQL command:
+DDL:data defination language
+DML:data manipulation language(not auto commited)
+TCL:transaction control language
+DCL:data control language
+DQL:data query language
+
+
+
+CREATE COMMAND:to create a database , to create table  
+		create database (database name) 
+		ex= create database lija;
+
+		create table (table name)
+		(column_name1 dataype1,
+		  column_name2 datatype2,
+		  column_name3 datatype3,
+		  column_name4 datatype4)
+
+		create table cus_tbl
+		(cus_id int not null auto_increment,
+		cus_firstname varchar(100)not null,
+		cus_surname varchar(100)not null,
+		primary key(cus_id)
+		); 
+
+USE COMMAND: to use any database for work
+		use (database name)
+		ex=use lija;
+
+DROP COMMAND:to delete database name
+		drop database (database name)
+		ex:drop database lija;
+---------------------------------------------------------------------------------------------------------------------------
+
+ALTER :to add a new column; it's used for altering the table structure,such as;
+              to rename any existing column; to change datatype of any column or to modify its size
+              to drop column from the table;  
+	EX: alter table result drop location;
+
+TRUNCATE: delete the record from the table=
+		delete table(drop)
+		EX: drop table xyz;
+
+RENAME: to rename table name
+	EX: rename table result to marksheet;
+ 
+----------------------------------------------------------------------------------------------------------------------------
+
+UPDATE :to modify  and update any record data into the table
+		update table_name set column_name=new-value where some_condition;
+		EX: update result set student_name='heta', where roll_no=8;
+
+for show table:  select*from table name
+
+DELETE :delete from table_name
+	where
+	(condition specified)
+	ex: delete from cus_tbl where cus_id=6;
+
+SELECT: to retrieve records from a table.
+	select
+	   column_name1,
+	   column_name2,
+	   column_name3,
+	   ...
+	   column_nameN
+	   from table_name;
+	EX: select*from result where student_id=3; ( use for perticular line)
+----------------------------------------------------------------------------------------------------------------------------------------------
+OPERATOR           DESCRIPTION
+=		Equal
+<>		not equal.  NOTE: in some versions of SQL this oprator may be written as!=
+>		greater than
+<		less than
+>=		greater than or equal
+<=		less than or equal
+Between		between an inclusive range
+Like		search for a pattern 
+In		to specify multiple possible values for a column
+
+EX: 	select*from result where student_id=3;
+	select*from result where roll_no between 3 and  6;
+	select*from result where student_name like 'k%';
+
+AND ,OR, NOT OPRATORS:
+ used for filter records based on more than one condition
+and oprator displays a records if all conditions separated by and is true
+or oparetor displays a r
+ecords if any conditions separated by or is true
+not oparator displays a record if the conditions is not tr
+
+AND Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...;
+
+OR Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...;
+
+NOT Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.collage management System
+2.hotel  management System
+3.Airline reservation system
+4.event  management System
+5.inventory  management System
+6.hospital  management System
+7.courier  management System
+8.online job portal
+9.hr  management System
+10. online examination
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT DISTINCT STATEMENTS: 
+Select column :  SELECT s_id,name,age FROM student;
+		SELECT Country FROM Customers;
+		SELECT DISTINCT  Country FROM Customers;
+		SELECT COUNT (DISTINCT Country) FROM Customers;
+
+ORDERED BY:
+select age from result order by age asc; 
+select * from result order by age asc;
+select * from result order by age desc;
+
+GROUP BY:
+select age from result where roll_no>3 group by age;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DISTINCT Statement:
+The SELECT DISTINCT statement is used to return only distinct (different) values.
+Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+Syntax:SELECT Country FROM Customers;
+	SELECT DISTINCT Country FROM Customers;
+	SELECT COUNT(DISTINCT Country) FROM Customers;
+
+
+
+ORDERD BY:Order by clause is used with SELECT statement for arranging retrieved data in sorted order. 
+	The Order by clause by default sorts the retrieved data in ascending order. To sort the data in descending 
+	order DESC keyword is used with Order by clause.
+Syntax:SELECT column-list|* FROM  table-name ORDER  BY  ASC | DESC;
+
+GROUP BY:Group by clause is used to group the results of a SELECT query based on one or more columns. 
+	It is also used with SQL functions to group the result from one or more tables.
+syntax: SELECT column_name, function(column_name)
+	FROM table_name 
+	WHERE condition 
+	GROUP BY column_name
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+HAVING CLAUSE:
+TOP:select top clause is used to specify the number of records to return. it is useful on large tables with thousands of records. 
+returning a large number of records can impact on performance.
+Systax: select top number| percent column_name(s)
+	from table_name
+	where condition;
+
+ALIAS:
+used to give a table, or a column in atable, a temporary name.
+alias are often used to make  column name more readable.
+Systax:select column_name as alias_name from table_name;
+NULL:A field with a NULL value is a field with no value.
+If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value.
+NOTE: A NULL value is different from a zero value or a field that contains spaces. A field with a NULL value is one that has been left blank during record creation!
+Syntax:	SELECT column_names
+	FROM table_name
+	WHERE column_name IS NULL;
+NOT NULL Syntax:Select column_names
+		From table_name
+		Where column_name is not null;
+-----------------------------------------------------------------------------------------------------------------------------
+FOREIGN KEY Constraint:
+A FOREIGN KEY is a key used to link two tables together.
+A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
+The table containing the foreign key is called the child table, and the table containing the Primary key is called the referenced or parent table.
+
+FOREIGN KEY on CREATE TABLE:	CREATE TABLE Orders (
+  			  	OrderID int NOT NULL,
+    				OrderNumber int NOT NULL,
+    				PersonID int,
+    				PRIMARY KEY (OrderID),
+    				FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+				);
+FOREIGN KEY on ALTER TABLE	:ALTER TABLE Orders
+				ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+					
+				ALTER TABLE Orders
+				ADD CONSTRAINT FK_PersonOrder
+				FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+DROP a FOREIGN KEY Constraint	:ALTER TABLE Orders
+				DROP FOREIGN KEY FK_PersonOrder;
+-------------------------------------------------------------------------------------------------------------------------------------
+CHECK Constraint:		The CHECK constraint is used to limit the value range that can be placed in a column.
+		If you define a CHECK constraint on a single column it allows only certain values for this column.
+		If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+Syntax:	CREATE TABLE Persons (
+    	ID int NOT NULL,
+   	 LastName varchar(255) NOT NULL,
+    	FirstName varchar(255),
+    	Age int,
+   	 CHECK (Age>=18)
+	);
+CHECK on ALTER TABLE:	ALTER TABLE Persons
+			ADD CHECK (Age>=18);
+
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following SQL syntax:
+ALTER TABLE Persons
+ADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes’);
+
+Drop a check Constraint:	ALTER TABLE Persons
+			DROP CHECK CHK_PersonAge;
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+JOIN:
+Types Joins :	INNER JOIN
+		LEFT JOIN
+		RIGHT JOIN
+		FULL JOIN
+JOIN syntax:
+SELECT column-names
+FROM table-name1  JOIN   table-name2 
+ON column-name1 = column-name2
+WHERE condition
+
+The general syntax with INNER is: 
+SELECT column-names
+FROM table-name1 INNER JOIN table-name2 
+ON column-name1 = column-name2
+WHERE condition
+
+LEFT JOIN:
+SELECT suppliers.supplier_id, suppliers.supplier_name, orders.order_date 
+FROM suppliers
+LEFT JOIN orders 
+ON suppliers.supplier_id = orders.supplier_id
+
+RIGHT JOIN:
+SELECT column-names
+FROM table-name1 RIGHT OUTER JOIN table-name2 
+ON column-name1 = column-name2
+WHERE condition
+
+UNION(FULL JOIN) :
+Select employee_id, job_id FROM employees UNION 
+Select employee_id,job_id FROM job_history;
+
+Select employee_id, job_id,department_id FROM employees UNION ALL 
+Select employee_id,job_id,department_id FROM job_history;
+
+
+
+
+
+
+
+
+	
